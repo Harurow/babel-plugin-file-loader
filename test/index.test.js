@@ -244,7 +244,7 @@ describe('index', function () {
 
   it('inlines file when the length in lower then the limit', function () {
     const result = transformCode(getFixtures('import-text.js'), {
-      extensions: ['txt'],
+      tests: [/\.txt$/i],
       name: '[path][name].[ext]',
       limit: 6
     }).code
@@ -253,7 +253,7 @@ describe('index', function () {
 
   it('doesnt output the file when its inlined', function () {
     transformCode(getFixtures('import-text.js'), {
-      extensions: ['txt'],
+      tests: [/\.txt$/i],
       name: '[path][name].[ext]',
       limit: 6
     })
@@ -262,7 +262,7 @@ describe('index', function () {
 
   it('doesnt inline file when the lenght equals the limit', function () {
     const result = transformCode(getFixtures('import-text.js'), {
-      extensions: ['txt'],
+      tests: [/\.txt$/i],
       name: '[path][name].[ext]',
       limit: 5
     }).code
@@ -271,7 +271,7 @@ describe('index', function () {
 
   it('ouputs the file when the lenght equals the limit', function () {
     transformCode(getFixtures('import-text.js'), {
-      extensions: ['txt'],
+      tests: [/\.txt$/i],
       name: '[path][name].[ext]',
       limit: 5
     })
@@ -282,7 +282,7 @@ describe('index', function () {
 
   it('inline file with an unknown type by not specifying mime type', function () {
     const result = transformCode(getFixtures('import-unknown.js'), {
-      extensions: ['unknown'],
+      tests: [/\.unknown$/i],
       name: '[path][name].[ext]',
       limit: 6
     }).code

@@ -107,8 +107,12 @@ function transform (rootPath, filePath, opts) {
   const contents = fs.readFileSync(filePath)
   if (contents.length < limit) {
     const src = Buffer.from(contents)
-    const mimetype = mime.getType(filePath) || ''
-    return `data:${mimetype};base64,${src.toString('base64')}`
+    if (opts.inlinedType === 'base64') {
+      const mimetype = mime.getType(filePath) || ''
+      return `data:${mimetype};base64,${src.toString('base64')}`
+    } else {
+      return src.toString()
+    }
   }
 
   url = url.replace(

@@ -31,11 +31,12 @@ This is equivalent to following default configuration:
       "file-loader",
       {
         "name": "[hash].[ext]",
-        "extensions": ["png", "jpg", "jpeg", "gif", "svg"],
+        "tests": [/\.gif$/i, /\.jpe?g$/i, /\.png$/i, /\.svg$/i],
         "publicPath": "/public",
         "outputPath": "/public",
         "context": "",
-        "limit": 0
+        "limit": 0,
+        "inlinedType": "base64"
       }
     ]
   ]
@@ -119,6 +120,12 @@ Path to directory relative to `.babelrc` where application source resides. By de
 Value in byte to determine if the content is base64 inlined. In that case, the file is not copy to `outputPath`. It replicates [url-loader](https://github.com/webpack-contrib/url-loader) webpack loader behaviour.
 
 Default is 0 which means nothing is inlined.
+
+### inlinedType
+
+Inlined contents encoding types.
+
+Default is `base64`.
 
 ## Contributing
 

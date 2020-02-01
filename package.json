@@ -3,7 +3,10 @@
   "version": "2.0.0",
   "description": "Like file-loader for webpack, but for Babel. Works with SSE apps.",
   "author": "Adam Stankiewicz <sheerun@sher.pl>",
-  "repository": "sheerun/babel-plugin-file-loader",
+  "contributors": [
+    "Harurow <Harurow@users.noreply.github.com>"
+  ],
+  "repository": "harurow/babel-plugin-file-loader",
   "license": "MIT",
   "keywords": [
     "nextjs",

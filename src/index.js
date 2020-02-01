@@ -1,4 +1,4 @@
-const { dirname, extname, resolve } = require('path')
+const { dirname, resolve } = require('path')
 const transform = require('./transform')
 
 const defaultOptions = {
@@ -6,8 +6,9 @@ const defaultOptions = {
   outputPath: '/public',
   publicPath: '/public',
   context: '',
-  extensions: ['gif', 'jpeg', 'jpg', 'png', 'svg'],
-  limit: 0
+  tests: [/\.gif$/i, /\.jpe?g$/i, /\.png$/i, /\.svg$/i],
+  limit: 0,
+  inlinedType: 'base64' // plain | base64
 }
 
 const getVariableName = p => {
@@ -17,10 +18,9 @@ const getVariableName = p => {
 }
 
 const applyTransform = (p, t, state, value, calleeName) => {
-  const ext = extname(value)
   const options = Object.assign({}, defaultOptions, state.opts)
 
-  if (options.extensions && options.extensions.indexOf(ext.slice(1)) >= 0) {
+  if (options.tests && options.tests.some(t => t.test(value))) {
     try {
       const rootPath = state.file.opts.sourceRoot || process.cwd()
       const scriptDirectory = dirname(resolve(state.file.opts.filename))
